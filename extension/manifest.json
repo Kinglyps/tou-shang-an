@@ -1,0 +1,75 @@
+{
+  "manifest_version": 3,
+  "name": "投上岸助手",
+  "version": "1.0.4",
+  "description": "批量投递自动化助手 - 配合投上岸桌面客户端使用",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "tabs",
+    "alarms"
+  ],
+  "host_permissions": [
+    "https://www.zhipin.com/*",
+    "https://www.liepin.com/*",
+    "https://www.zhaopin.com/*",
+    "https://sou.zhaopin.com/*",
+    "https://www.51job.com/*",
+    "https://we.51job.com/*",
+    "https://jobs.51job.com/*",
+    "http://localhost:5100/*",
+    "ws://localhost:9528/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.zhipin.com/*"],
+      "css": [],
+      "world": "MAIN",
+      "js": ["content/boss_net.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["https://www.zhipin.com/*"],
+      "js": ["lib/behavior.js", "lib/dom.js", "content/boss.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://www.liepin.com/*"],
+      "js": ["lib/behavior.js", "lib/dom.js", "content/liepin.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://www.zhaopin.com/*", "https://sou.zhaopin.com/*"],
+      "js": ["lib/behavior.js", "lib/dom.js", "content/zhilian.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://www.51job.com/*", "https://we.51job.com/*", "https://jobs.51job.com/*"],
+      "js": ["lib/behavior.js", "lib/dom.js", "content/qiancheng.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["lib/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
