@@ -6,3 +6,6 @@ outputs/*
 .DS_Store
 Thumbs.db
 *.log
+
+# 发布用压缩包（仅作为 Release 附件，不进 git）
+*.zip
